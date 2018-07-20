@@ -1,25 +1,25 @@
 package com.pravdakotchestno.visualizer;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Frame extends JFrame{
     private Panel panel;
-    private JTextField octet1;
-    private JTextField octet2;
-    private JTextField octet3;
-    private JTextField octet4;
-    private JTextField octet5;
-    private JTextField octet6;
-    private JTextField octet7;
-    private JTextField octet8;
+    private ArrayList<JTextField> octets;
 
     public Frame(){
+        octets = new ArrayList<>();
+        for(int i = 0; i<8; i++){
+            octets.add(new JTextField());
+            //octets.get(i).setBounds();
+        }
+
         panel = new Panel();
 
         add(panel);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300,500);
+        setSize(400,550);
         setLocationRelativeTo(null);
 
         setVisible(true);
