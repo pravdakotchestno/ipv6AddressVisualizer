@@ -6,9 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Panel extends JPanel implements MouseListener{
+
     public Panel(){
         addMouseListener(this);
     }
+
     public void mouseClicked(MouseEvent e) {
         int x = (e.getX())/50;
         int y = (e.getY()-130)/50;
@@ -25,7 +27,7 @@ public class Panel extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {}
 
     public void paintComponent(Graphics g){
-        
-        Main.paintVisualization(g,null);
+
+        Main.paintVisualization(g,"2af3:28f0:ff0c:a083:fafe:b0ac:2020:22d2");
     }
 }
