@@ -10,8 +10,8 @@ public class Panel extends JPanel implements MouseListener{
         addMouseListener(this);
     }
     public void mouseClicked(MouseEvent e) {
-        int x = (e.getX()-6)/36;
-        int y = (e.getY()-180)/36;
+        int x = (e.getX())/50;
+        int y = (e.getY()-130)/50;
         //TODO
         System.out.println("x = "+x+" y = "+y);
     }
@@ -25,8 +25,7 @@ public class Panel extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {}
 
     public void paintComponent(Graphics g){
-
-        g.fillRect(6,180,288,288);
+        
         Main.paintVisualization(g,null);
     }
 }
