@@ -16,8 +16,8 @@ public class Main {
     public static void paintVisualization(Graphics g, String address){
         //TODO
         g.setColor(Color.WHITE);
-        g.fillRect(6,180,288,288);
+        g.fillRect(0,130,400,400);
         g.setColor(Color.BLACK);
-        g.fillRect(6,180,36,36);
+        g.fillRect(0,130,50,50);
     }
 }
