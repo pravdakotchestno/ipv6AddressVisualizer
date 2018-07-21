@@ -27,7 +27,6 @@ public class Panel extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {}
 
     public void paintComponent(Graphics g){
-
-        Main.paintVisualization(g,"2af3:28f0:ff0c:a083:fafe:b0ac:2020:22d2");
+        Main.paintVisualization(g);
     }
 }

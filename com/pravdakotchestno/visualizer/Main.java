@@ -1,22 +1,22 @@
 package com.pravdakotchestno.visualizer;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Main {
+    private static String address = "0000:0000:0000:0000:0000:0000:0000:0000";
 
     public static void main(String[] args) {
         new Frame();
     }
 
-    public static void paintVisualization(Graphics g, String address){
+    public static void paintVisualization(Graphics g){
         String octets[] = address.split(":");
         String oldoctets[] = octets;
         for(int i = 0; i < 8; i++){
             String octet = "";
             for(char ch : oldoctets[i].toCharArray()){
                 int b = (ch - '0') % 4;
-                int a = (ch - '0') >> 2;
+                int a = ((ch - '0') >> 2)%4;
                 octet+=(a +""+ b);
             }
             octets[i] = octet;
@@ -57,6 +57,9 @@ public class Main {
             g.fillRect(0,130,400,400);
         }
 
-
     }
+    public static void changeOctet(int x, int y){
+        //TODO
+    }
+
 }
