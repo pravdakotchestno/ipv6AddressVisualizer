@@ -20,13 +20,6 @@ class Frame extends JFrame{
             add(octets.get(i));
         }
 
-        for(int i = 0; i < 8; i++){
-            JLabel label = new JLabel();
-            label.setBounds(85*i+85,10,4,30);
-            label.setText(":");
-            add(label);
-        }
-
         panel = new Panel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +47,7 @@ class HexNumberComboBox extends JComboBox{
     }
     private static String[] getItemsArray(){
         String[] items = new String[65536];
-        String[] chars = new String[]{"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"};
+        String[] chars = new String[]{"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
         int i = 0;
         for(String a : chars){
             for(String b : chars){
