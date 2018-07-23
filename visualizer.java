@@ -22,6 +22,8 @@ class Frame extends JFrame{
 
         panel = new Panel();
 
+        add(panel);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(700,550);
@@ -29,6 +31,7 @@ class Frame extends JFrame{
         setLocationRelativeTo(null);
 
         setVisible(true);
+
 
     }
 }
