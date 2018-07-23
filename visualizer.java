@@ -16,7 +16,8 @@ class Frame extends JFrame{
 
         octets = new ArrayList<>();
         for(int i = 0; i < 8; i++){
-            octets.add(new HexNumberComboBox(85*i,10,85,30));
+            int comboboxwidth = 88;
+            octets.add(new HexNumberComboBox(comboboxwidth * i,10, comboboxwidth,30));
             add(octets.get(i));
         }
 
