@@ -16,7 +16,7 @@ class Frame extends JFrame{
 
         octets = new ArrayList<>();
         for(int i = 0; i < 8; i++){
-            int comboboxwidth = 88;
+            int comboboxwidth = 90;
             octets.add(new HexNumberComboBox(comboboxwidth * i,10, comboboxwidth,30));
             add(octets.get(i));
         }
@@ -27,7 +27,7 @@ class Frame extends JFrame{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(700,550);
+        setSize(720,550);
 
         setLocationRelativeTo(null);
 
