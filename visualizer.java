@@ -1,9 +1,64 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class visualizer {
     public static void main(String[]args){
         new Frame();
+    }
+
+    public static void paintVisualization(Graphics g, String address){
+        String octets[] = address.split(":");
+        String tempoctets[] = octets;
+        for(int i = 0; i < 8; i++){
+            String octet = "";
+            for(char ch : tempoctets[i].toCharArray()){
+                int b = (ch - '0') % 4;
+                int a = ((ch - '0') >> 2)%4;
+                octet+=(a +""+ b);
+            }
+            octets[i] = octet;
+        }
+
+        try{
+            for(int y = 0; y < 8; y++){
+                for(int x = 0; x < 8; x++){
+                    int currentchar = octets[y].toCharArray()[x]-'0';
+
+                    switch(currentchar) {
+                        case 0: {
+                            g.setColor(Color.BLACK);
+                            break;
+                        }
+                        case 1: {
+                            g.setColor(Color.WHITE);
+                            break;
+                        }
+                        case 2: {
+                            g.setColor(Color.RED);
+                            break;
+                        }
+                        case 3: {
+                            g.setColor(Color.GREEN);
+                            break;
+                        }
+                        default: {
+                            throw new ArithmeticException();
+                        }
+                    }
+                    g.fillRect(x * 36, y * 36,36,36);
+                }
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            g.setColor(Color.WHITE);
+            g.fillRect(0,0,288,288);
+        }
+
+
     }
 }
 
@@ -22,9 +77,9 @@ class Frame extends JFrame{
         }
 
         panel = new Panel();
-
+        panel.setBounds(216,131,288,288);
         add(panel);
-
+        setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(720,550);
@@ -35,10 +90,38 @@ class Frame extends JFrame{
 
 
     }
+
 }
 
-class Panel extends JPanel{
+class Panel extends JPanel implements MouseListener{
 
+    private static String address="7632:AB56:FACE:B00C:0000:6540:12AD:FFFF";
+
+    public Panel(){
+        addMouseListener(this);
+    }
+
+    public void paintComponent(Graphics g){
+        visualizer.paintVisualization(g, address);
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX()/36;
+        int y = e.getY()/36;
+        System.out.println(x+" "+y);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
 
 class HexNumberComboBox extends JComboBox{
