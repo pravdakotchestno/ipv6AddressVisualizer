@@ -5,11 +5,15 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class visualizer {
+
+    private static String address="7632:AB56:FACE:B00C:0000:6540:12AD:FFFF";
+    private static Frame frame;
+
     public static void main(String[]args){
-        new Frame();
+        frame = new Frame();
     }
 
-    public static void paintVisualization(Graphics g, String address){
+    public static void paintVisualization(Graphics g){
         String octets[] = address.split(":");
         String tempoctets[] = octets;
         for(int i = 0; i < 8; i++){
@@ -60,9 +64,17 @@ public class visualizer {
 
 
     }
+
+    public static void repaintVisualization() {
+        address = "";
+        for(HexNumberComboBox cb : frame.getOctets()){
+            address += (String)cb.getSelectedItem();
+        }
+    }
 }
 
 class Frame extends JFrame{
+
     private Panel panel;
 
     private ArrayList<HexNumberComboBox> octets;
@@ -91,18 +103,20 @@ class Frame extends JFrame{
 
     }
 
+    public ArrayList<HexNumberComboBox> getOctets(){
+        return octets;
+    }
+
 }
 
 class Panel extends JPanel implements MouseListener{
-
-    private static String address="7632:AB56:FACE:B00C:0000:6540:12AD:FFFF";
 
     public Panel(){
         addMouseListener(this);
     }
 
     public void paintComponent(Graphics g){
-        visualizer.paintVisualization(g, address);
+        visualizer.paintVisualization(g);
     }
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -129,7 +143,7 @@ class HexNumberComboBox extends JComboBox{
         super(getItemsArray());
         setBounds(x, y, width, height);
         addActionListener(e->{
-
+            visualizer.repaintVisualization();
         });
     }
     private static String[] getItemsArray(){
