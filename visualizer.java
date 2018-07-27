@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class visualizer {
 
-    private static String address="7632:AB56:FACE:B00C:0000:6540:12AD:FFFF";
+    private static String address="0000:0000:0000:0000:0000:0000:0000:0000";
     private static Frame frame;
 
     public static void main(String[]args){
@@ -68,8 +68,9 @@ public class visualizer {
     public static void repaintVisualization() {
         address = "";
         for(HexNumberComboBox cb : frame.getOctets()){
-            address += (String)cb.getSelectedItem();
+            address += (String)cb.getSelectedItem()+":";
         }
+        frame.repaintPanel();
     }
 }
 
@@ -107,6 +108,9 @@ class Frame extends JFrame{
         return octets;
     }
 
+    public void repaintPanel() {
+        panel.repaint();
+    }
 }
 
 class Panel extends JPanel implements MouseListener{
