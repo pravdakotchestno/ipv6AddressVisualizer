@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class visualizer {
 
-    private static String address="0000:0000:0000:0000:0000:0000:0000:0000";
     private static Frame frame;
 
     public static void main(String[]args){
@@ -14,63 +13,52 @@ public class visualizer {
     }
 
     public static void paintVisualization(Graphics g){
-        String octets[] = address.split(":");
-        String tempoctets[] = octets;
-        for(int i = 0; i < 8; i++){
-            String octet = "";
-            for(char ch : tempoctets[i].toCharArray()){
-                int b = (ch - '0') % 4;
-                int a = ((ch - '0') >> 2)%4;
-                octet+=(a +""+ b);
-            }
-            octets[i] = octet;
-        }
 
-        try{
-            for(int y = 0; y < 8; y++){
-                for(int x = 0; x < 8; x++){
-                    int currentchar = octets[y].toCharArray()[x]-'0';
 
-                    switch(currentchar) {
-                        case 0: {
-                            g.setColor(Color.BLACK);
-                            break;
-                        }
-                        case 1: {
-                            g.setColor(Color.WHITE);
-                            break;
-                        }
-                        case 2: {
-                            g.setColor(Color.RED);
-                            break;
-                        }
-                        case 3: {
-                            g.setColor(Color.GREEN);
-                            break;
-                        }
-                        default: {
-                            throw new ArithmeticException();
-                        }
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                switch((frame.getOctets().get(y).getSelectedIndex()>>x*2)%4) {
+                    case 0: {
+                        g.setColor(Color.BLACK);
+                        break;
                     }
-                    g.fillRect(x * 36, y * 36,36,36);
+                    case 1: {
+                        g.setColor(Color.WHITE);
+                        break;
+                    }
+                    case 2: {
+                        g.setColor(Color.RED);
+                        break;
+                    }
+                    case 3: {
+                        g.setColor(Color.GREEN);
+                        break;
+                    }
+                    default: {
+                        throw new ArithmeticException();
+                    }
                 }
-
+                g.fillRect(x * 36, y * 36,36,36);
             }
-        }catch(Exception e){
-            e.printStackTrace();
-            g.setColor(Color.WHITE);
-            g.fillRect(0,0,288,288);
+
         }
 
 
     }
 
     public static void repaintVisualization() {
-        address = "";
-        for(HexNumberComboBox cb : frame.getOctets()){
-            address += (String)cb.getSelectedItem()+":";
-        }
         frame.repaintPanel();
+    }
+
+    public static void changeOctet(int x, int y) {
+        /*
+        int index = frame.getOctets().get(y).getSelectedIndex();
+
+        int a = index%(int)Math.pow(2,x);
+        int b = index%(int)Math.pow(2,x+2)^a;
+
+        frame.getOctets().get(y).setSelectedIndex(a^b);
+        */
     }
 }
 
@@ -126,7 +114,8 @@ class Panel extends JPanel implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = e.getX()/36;
         int y = e.getY()/36;
-        System.out.println(x+" "+y);
+        visualizer.changeOctet(x,y);
+        repaint();
     }
 
     @Override
