@@ -51,14 +51,16 @@ public class visualizer {
     }
 
     public static void changeOctet(int x, int y) {
-        /*
+
         int index = frame.getOctets().get(y).getSelectedIndex();
 
-        int a = index%(int)Math.pow(2,x);
-        int b = index%(int)Math.pow(2,x+2)^a;
+        int a = index>>(x*2+2)<<(x*2+2);
+        int b = index%(1<<(x*2));
+        int c = (index-a)>>(x*2);
+        c = ((c+1)%4)<<(x*2);
 
-        frame.getOctets().get(y).setSelectedIndex(a^b);
-        */
+        frame.getOctets().get(y).setSelectedIndex(a+b+c);
+
     }
 }
 
